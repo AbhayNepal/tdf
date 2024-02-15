@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { User } from './user';
 
 @Component({
   selector: 'app-root',
@@ -13,4 +14,6 @@ import { FormsModule } from '@angular/forms';
 export class AppComponent {
   title = 'tdf';
   topics=['Angular','React','Vue']
+
+  userModel = new User('','ktm','bagmati','rob@Test.com',335355,'','morning',true);
 }
