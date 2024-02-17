@@ -49,10 +49,17 @@
     </div>
     <br>
     <div class="form-group">
-      <select class="custom-text" [(ngModel)]="userModel.topic" name="interested in">
-        <option selected>I am interested in</option>
+      <select (blur)="validateTopic(topic.value)" (change)="validateTopic(topic.value)"
+       required  #topic="ngModel" class="custom-text" [class.is-invalid]="topicHasError && topic.touched"
+        [(ngModel)]="userModel.topic" name="interested in">
+        <option value="">I am interested in</option>
         <option *ngFor="let topic of topics">{{topic}}</option>
       </select>
+      <br />
+      <small class="text-danger" [class.d-none]="!topicHasError || topic.untouched">
+      Please choose a topic.
+      </small>
+
     </div>
     <br>
     <div class="mb-3">

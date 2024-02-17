@@ -14,6 +14,16 @@ import { User } from './user';
 export class AppComponent {
   title = 'tdf';
   topics=['Angular','React','Vue']
+  topicHasError = true;
 
-  userModel = new User('','ktm','bagmati','rob@Test.com',335355,'','morning',true);
+  userModel = new User('','ktm','bagmati','rob@Test.com',335355,'default','morning',true);
+
+  validateTopic(value:string){
+    if(value==='default'){
+      this.topicHasError = true;
+    }
+    else{
+      this.topicHasError = false;
+    }
+  }
 }
