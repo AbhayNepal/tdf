@@ -1,6 +1,6 @@
 <div class="container-fluid">
   <h1>BootCamp Enrollment Form</h1>
-  <form #userForm="ngForm">
+  <form #userForm="ngForm" *ngIf="!submitted" novalidate (ngSubmit)="onSubmit()">
 
     <div ngModelGroup="address">
       <div class="form-group">
@@ -52,7 +52,7 @@
       <select (blur)="validateTopic(topic.value)" (change)="validateTopic(topic.value)"
        required  #topic="ngModel" class="custom-text" [class.is-invalid]="topicHasError && topic.touched"
         [(ngModel)]="userModel.topic" name="interested in">
-        <option value="">I am interested in</option>
+        <option value="default">I am interested in</option>
         <option *ngFor="let topic of topics">{{topic}}</option>
       </select>
       <br />
@@ -84,6 +84,9 @@
       </label>
     </div>
     <br>
-    <button class="btn btn-primary" type="submit">Submit</button>
+    <button class="btn btn-primary" type="submit" [class.disabled]="this.topicHasError||!topic.valid || !phone.valid">Submit</button>
+    <br>
+    <small class="text-danger" *ngIf="this.topicHasError||!topic.valid || !phone.valid">please fill the form correctly before submitting</small>
   </form>
-</div>
+  <h3  *ngIf="submitted" class="text-success">Form has been submitted!</h3>
+</div> 
