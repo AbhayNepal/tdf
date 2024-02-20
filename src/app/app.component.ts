@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, NgForm } from '@angular/forms';
 import { User } from './user';
 import { HttpClientModule } from '@angular/common/http';
 import { EnrollmentService } from './enrollment.service';
@@ -21,16 +21,18 @@ export class AppComponent {
   title = 'tdf';
   topics=['Angular','React','Vue']
   topicHasError = true;
+  errorMsg = '';
   userModel = new User('','ktm','bagmati','rob@Test.com',335355,'default','morning',true);
 
-  onSubmit() {
+  onSubmit(userForm:NgForm) {
     this.submitted = true;
-  this._enrollmentService.enroll(this.userModel)
-  .subscribe(
-    data=> console.log('Success!',data),
-    error=>console.log('Error!',error)
-  )
-  }
+    console.log(userForm);
+  // this._enrollmentService.enroll(this.userModel)
+  // .subscribe(
+  //   data=> console.log('Success!',data),
+  //   error=>this.errorMsg = error.statusText
+  // )
+}
 
   validateTopic(value:string){
     if(value ==='default'){
